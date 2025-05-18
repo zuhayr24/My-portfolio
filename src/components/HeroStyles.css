@@ -1,0 +1,215 @@
+/* Grid pattern for background */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgb(51 65 85 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(51 65 85 / 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Animation for typing cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+/* Pulse animation for electric effects */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Circuit board pattern */
+.circuit-pattern {
+  background-color: rgba(0, 0, 0, 0.2);
+  background-image: 
+    radial-gradient(rgba(30, 174, 219, 0.4) 2px, transparent 2px),
+    linear-gradient(rgba(30, 174, 219, 0.2) 1px, transparent 1px),
+    linear-gradient(to right, rgba(30, 174, 219, 0.2) 1px, transparent 1px);
+  background-size: 20px 20px, 10px 10px, 10px 10px;
+  background-position: 0 0, 10px 10px, 10px 10px;
+}
+
+/* Data flow animation */
+@keyframes dataFlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+.data-flow {
+  background: linear-gradient(90deg, 
+    rgba(30, 174, 219, 0), 
+    rgba(30, 174, 219, 0.4), 
+    rgba(30, 174, 219, 0)
+  ) 0% 0% / 200% 100%;
+  animation: dataFlow 3s linear infinite;
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: 0 0 15px rgba(30, 174, 219, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.glow:hover {
+  box-shadow: 0 0 25px rgba(30, 174, 219, 0.8);
+}
+
+/* Background particles */
+.particles-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* 3D text effect */
+.text-3d {
+  text-shadow: 
+    0px 1px 0px rgba(30, 174, 219, 0.4),
+    0px 2px 0px rgba(30, 174, 219, 0.3),
+    0px 3px 0px rgba(30, 174, 219, 0.2),
+    0px 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Matrix text animation */
+@keyframes matrixText {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.matrix-text > * {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: matrixText 0.5s ease-out forwards;
+}
+
+/* Circuit animation */
+@keyframes circuit-pulse {
+  0%, 100% { opacity: 0.3; stroke-dashoffset: 0; }
+  50% { opacity: 1; stroke-dashoffset: 20; }
+}
+
+.circuit-line {
+  stroke-dasharray: 10;
+  animation: circuit-pulse 4s linear infinite;
+}
+
+/* Tech geometric shapes animation */
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.rotate-slow {
+  animation: rotate 20s linear infinite;
+}
+
+.rotate-medium {
+  animation: rotate 12s linear infinite;
+}
+
+.rotate-fast {
+  animation: rotate 6s linear infinite;
+}
+
+/* Scanning line animation */
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(500%); }
+}
+
+.animate-scan {
+  animation: scan 3s ease-in-out infinite;
+}
+
+/* Pulse animation for tech elements */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.5); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
+.pulse-slow {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Hexagon clip path animation */
+@keyframes hexRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Orbit animation for tech particles */
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(230px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(230px) rotate(-360deg); }
+}
+
+/* Advanced orbit animation for tech particles */
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+
+/* 3D hover effect */
+@keyframes float-3d {
+  0%, 100% { transform: translateZ(0) rotateX(0) rotateY(0); }
+  25% { transform: translateZ(10px) rotateX(2deg) rotateY(2deg); }
+  50% { transform: translateZ(5px) rotateX(-2deg) rotateY(3deg); }
+  75% { transform: translateZ(8px) rotateX(1deg) rotateY(-1deg); }
+}
+
+/* Data points flow along paths */
+@keyframes flow-along-path {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+/* Electric spark animation */
+@keyframes electric-spark {
+  0%, 100% { opacity: 0; }
+  5%, 95% { opacity: 0; }
+  10%, 15%, 85%, 90% { opacity: 0.3; }
+  20%, 80% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.electric-spark {
+  animation: electric-spark 2s ease-in-out infinite;
+}
+
+/* Floating animation for small elements */
+@keyframes floating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.floating {
+  animation: floating 5s ease-in-out infinite;
+}
+
+/* Digital noise effect */
+@keyframes digital-noise {
+  0%, 3%, 10%, 30%, 70%, 100% { opacity: 0; }
+  5%, 8%, 20%, 50%, 80% { opacity: 0.05; }
+  6%, 15%, 25%, 40%, 65%, 90% { opacity: 0.1; }
+}
+
+.digital-noise {
+  animation: digital-noise 10s steps(1) infinite;
+}
