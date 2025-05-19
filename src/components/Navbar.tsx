@@ -3,14 +3,12 @@ import React, { useState, useEffect } from 'react';
 import MagneticElement from './MagneticElement';
 import { Button } from '@/components/ui/button';
 
-const Navbar: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
+const Navbar: React.FC = () => {  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const navLinks = [
     { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#contact', label: 'Contact' }
+    { href: '#projects', label: 'Projects' }
   ];
   
   useEffect(() => {
@@ -75,9 +73,7 @@ const Navbar: React.FC = () => {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
           )}
         </button>
-      </nav>
-      
-      {/* Mobile Navigation */}
+      </nav>      {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-md">
           <ul className="py-4 px-4 space-y-4">

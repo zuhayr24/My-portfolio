@@ -1,0 +1,46 @@
+/* Temporary cursor fix stylesheet */
+/* Apply this to ensure the custom cursor works correctly */
+
+/* Ensure all foreground elements don't interfere with custom cursor */
+:root {
+  --cursor-override: none !important;
+}
+
+html, body, #root, * {
+  cursor: var(--cursor-override) !important;
+}
+
+button, a, input, textarea, select, [role="button"],
+.filter-btn, .filter-button, .tech-badge, .project-card,
+.coming-soon-card, [type="button"], [type="submit"],
+[type="reset"] {
+  cursor: var(--cursor-override) !important;
+}
+
+/* Override browser-specific cursor styles */
+:root *::before, :root *::after {
+  cursor: var(--cursor-override) !important;
+}
+
+/* Target grabbing and resize cursors specifically */
+*:active, *:focus, 
+*[draggable="true"], *[draggable="true"]:active, 
+*[draggable="true"]:hover {
+  cursor: var(--cursor-override) !important;
+}
+
+/* Override browser default styles for resize, move, etc. */
+*[style*="cursor"] {
+  cursor: var(--cursor-override) !important;
+}
+
+/* Ensure the cursor style attribute is important */
+[style*="cursor:"] {
+  cursor: var(--cursor-override) !important;
+}
+
+/* Apply to commonly used libraries and button components */
+.btn, .button, [class*="btn-"],
+[class*="button-"], [onclick], [tabindex] {
+  cursor: var(--cursor-override) !important;
+}

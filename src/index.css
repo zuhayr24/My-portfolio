@@ -42,10 +42,18 @@
 @layer base {
   * {
     @apply border-border;
-  }
-  body {
+  }  body {
     @apply bg-background text-foreground font-space-grotesk;
     cursor: none;
+  }
+  
+  /* Fix cursor styles for interactive elements */
+  a, button, .magnetic-element, input, textarea, select, [role="button"],
+  .filter-btn, .tech-badge, .project-card, .coming-soon-card, [type="button"],
+  [type="submit"], [type="reset"], .filter-button, .filter-button-active, 
+  .tech-badge, *[onclick], *[data-interactive], div[tabindex="0"], 
+  .welcome-overlay div[role="button"] {
+    cursor: none !important;
   }
 }
 

@@ -54,15 +54,12 @@ const Index = () => {
           behavior: 'smooth'
         });
       }
-    };
-    
-    document.addEventListener('click', handleHashLinkClick);
+    };    document.addEventListener('click', handleHashLinkClick);
     window.addEventListener('scroll', handleScroll);
-    
-    // Hide welcome overlay after 4.5 seconds
+      // Hide welcome overlay after 8 seconds (increased to allow displacement text to fully show)
     const timer = setTimeout(() => {
       setShowWelcome(false);
-    }, 4500);
+    }, 8000);
     
     // Setup intersection observer for sections
     const observer = new IntersectionObserver((entries) => {
@@ -105,10 +102,35 @@ const Index = () => {
         <div className="circuit-line circuit-line-3"></div>
         <div className="circuit-dot circuit-dot-3"></div>
       </div>
-      
-      {showWelcome && (
+        {showWelcome && (
         <div className="welcome-overlay">
           <h1 className="welcome-text">INITIALIZING</h1>
+            {/* Loading progress bar */}
+          <div className="loading-container">
+            <div className="loading-bar">
+              <div className="loading-percent">100%</div>
+            </div>
+          </div>
+          
+          {/* Status updates - tech initialization sequence */}
+          <ul className="status-updates">
+            <li className="status-item status-item-1 status-item-success">
+              <span className="text-gray-400">[00:01]</span> Initializing core modules...
+            </li>
+            <li className="status-item status-item-2 status-item-success">
+              <span className="text-gray-400">[00:02]</span> Loading project data...
+            </li>
+            <li className="status-item status-item-3 status-item-success">
+              <span className="text-gray-400">[00:03]</span> Configuring interface...
+            </li>
+            <li className="status-item status-item-4 status-item-success">
+              <span className="text-gray-400">[00:04]</span> Optimizing animations...
+            </li>
+            <li className="status-item status-item-5 status-item-loading">
+              <span className="text-gray-400">[00:05]</span> Launching experience
+            </li>
+          </ul>
+          
           <div className="welcome-quote-container">
             <div className="welcome-quote">
               <div className="displacement-text">&gt; DISPLACEMENT IS BETTER THAN DISTANCE</div>
@@ -132,8 +154,7 @@ const Index = () => {
         <ProjectsSection ref={(el) => (sectionsRef.current[2] = el)} className="section-fade-in" />
         <ContactSection ref={(el) => (sectionsRef.current[3] = el)} className="section-fade-in" />
       </main>
-      
-      {/* Tech navigation indicators */}
+        {/* Tech navigation indicators */}
       <div className="fixed right-6 top-1/2 transform -translate-y-1/2 hidden md:flex flex-col items-center space-y-4 z-50">
         {[0, 1, 2, 3].map((index) => (
           <button
@@ -143,6 +164,7 @@ const Index = () => {
                 ? 'bg-primary w-4 h-4' 
                 : 'bg-primary/30 hover:bg-primary/50'
             }`}
+            style={{ cursor: 'none' }}
             onClick={() => {
               if (!sectionsRef.current[index]) return;
               window.scrollTo({

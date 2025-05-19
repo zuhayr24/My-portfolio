@@ -1,5 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
+import './CustomCursorStyles.css';
+import './CursorFix.css'; // Import the cursor fix stylesheet
 
 const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -23,21 +25,25 @@ const CustomCursor: React.FC = () => {
 
     const handleMouseOut = () => {
       setIsHovering(false);
-    };
-
-    // Add listeners for all interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .magnetic-element');
+    };    // Add listeners for all interactive elements
+    const interactiveElements = document.querySelectorAll(
+      'a, button, .magnetic-element, input, textarea, select, [role="button"], .filter-btn, .filter-button, .tech-badge, .project-card, .coming-soon-card'
+    );
     
     interactiveElements.forEach((element) => {
       element.addEventListener('mouseover', handleMouseOver);
       element.addEventListener('mouseout', handleMouseOut);
     });
 
-    document.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
+    document.addEventListener('mousemove', handleMouseMove);    return () => {
       document.removeEventListener('mousemove', handleMouseMove);
-      interactiveElements.forEach((element) => {
+      
+      // Re-query elements to ensure we get the current set
+      const elementsToCleanup = document.querySelectorAll(
+        'a, button, .magnetic-element, input, textarea, select, [role="button"], .filter-btn, .filter-button, .tech-badge, .project-card, .coming-soon-card'
+      );
+      
+      elementsToCleanup.forEach((element) => {
         element.removeEventListener('mouseover', handleMouseOver);
         element.removeEventListener('mouseout', handleMouseOut);
       });
