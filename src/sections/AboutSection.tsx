@@ -1,255 +1,372 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import DownloadButton from '../components/DownloadButton';
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
-} from '@/components/ui/carousel';
+import './AboutStyles.css';
 
-// Custom CSS for animations
-const animationStyles = `
-  @keyframes slideIn {
-    0% {
-      opacity: 0;
-      transform: translateX(20px);
+interface AboutSectionProps {
+  className?: string;
+}
+
+const AboutSection = forwardRef<HTMLElement, AboutSectionProps>(({ className = '' }, ref) => {
+  const [activeTab, setActiveTab] = useState('education');  // Technical skills with categories
+  const technicalSkills = {
+    frontend: [
+      { name: 'React', icon: '⚛️' },
+      { name: 'JavaScript', icon: 'JS' },
+      { name: 'TypeScript', icon: 'TS' },
+      { name: 'HTML/CSS', icon: '🎨' },
+      { name: 'Bootstrap', icon: '🅱️' },
+      { name: 'Tailwind', icon: '🌊' },
+    ],
+    backend: [
+      { name: 'Java', icon: '☕' },
+      { name: 'Spring', icon: '🍃' },
+      { name: 'C++', icon: '⚙️' },
+      { name: 'REST API', icon: '🔄' },
+    ],
+    toolsDb: [
+      { name: 'Oracle DB', icon: '🛢️' },
+      { name: 'MySQL', icon: '🐬' },
+      { name: 'SAP ABAP', icon: '💼' },
+      { name: 'IntelliJ IDEA', icon: '🧠' },
+    ],
+    ai: [
+      { name: 'ChatGPT', icon: '🤖' },
+      { name: 'GitHub Copilot', icon: '👨‍💻' },
+    ]
+  };
+  
+  // Certifications
+  const certifications = [
+    {
+      title: 'SAP Certified Associate - Back-End Developer - ABAP Cloud',
+      issuer: 'SAP',
+      date: 'Issued Jul 2024 • Expires Jul 2025',
+      credentialId: 'See credential',
+      credentialUrl: '#',
+      logo: '💼'
+    },
+    {
+      title: 'ChatGPT',
+      issuer: 'GUVI Support',
+      date: 'Issued Aug 2023',
+      credentialId: 't8M2688111090aBy31',
+      credentialUrl: '#',
+      logo: '🤖'
+    },
+    {
+      title: 'CCNAv7: Introduction to Networks',
+      issuer: 'Cisco Networking Academy',
+      date: 'Issued May 2023',
+      credentialId: '',
+      credentialUrl: '',
+      logo: '🌐'
+    },
+    {
+      title: 'Python Bootcamp: Go from zero to hero in python 3',
+      issuer: 'Udemy',
+      date: 'Issued May 2020',
+      credentialId: 'UC-f99e0168-e5b6-4955-906-081605246db9',
+      credentialUrl: '#',
+      logo: '🐍'
     }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  @keyframes skillBarFill {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-  
-  .skill-item {
-    animation: slideIn 0.5s ease forwards;
-    opacity: 0;
-  }
-  
-  .about-item {
-    animation: slideIn 0.5s ease forwards;
-    opacity: 0;
-  }
-  
-  .skill-bar {
-    transition: width 1.5s cubic-bezier(0.1, 0.5, 0.2, 1);
-  }
-`;
-
-const AboutSection: React.FC = () => {
-  const [api, setApi] = useState<any>(null);
-  const [current, setCurrent] = useState(0);
-
-  // Add animation effect for skills when slide changes
-  const skillsRef = useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
-  
-  const skills = [
-    { name: 'Java', level: 90 },
-    { name: 'TypeScript', level: 85 },
-    { name: 'Node.js', level: 80 },
-    { name: 'GraphQL', level: 75 },
-    { name: 'Three.js', level: 70 },
-    { name: 'React', level: 88 },
-    { name: 'Vue.js', level: 65 },
-    { name: 'Python', level: 72 },
-    { name: 'MongoDB', level: 78 },
-    { name: 'PostgreSQL', level: 76 },
-    { name: 'Docker', level: 68 },
-    { name: 'AWS', level: 65 },
+  ];// Education and certifications
+  const credentials = [
+    { 
+      title: 'B.Tech Information Technology', 
+      institution: 'Madras Institute of Technology', 
+      year: '2020-2024',
+      highlights: [
+        'Participated in Caterpillar Hackathon, working on real-time gear pulley problem solutions',
+        'Participated in annual football year match',
+        'Focused on software development and data structures'
+      ]
+    },
+    { 
+      title: '12th Grade',      institution: 'SBOA School and Junior College',
+      year: 'Computer Science Major',
+      highlights: [
+        'Higher secondary education with Computer Science specialization'
+      ]
+    },
+    { 
+      title: '10th Grade', 
+      institution: 'Velammal Bodhi Campus', 
+      year: 'Science Major',
+      highlights: [
+        'Secondary education with focus on Science'
+      ]
+    },
   ];
-  
-  useEffect(() => {
-    if (!api) return;
-    
-    const onSelect = () => {
-      setCurrent(api.selectedScrollSnap());
-    };
-    
-    api.on('select', onSelect);
-    api.on('reInit', onSelect);
-    
-    return () => {
-      api?.off('select', onSelect);
-    };
-  }, [api]);
-  
-  // Animation effect when showing skills
-  useEffect(() => {
-    if (current === 1 && skillsRef.current) {
-      const skillBars = skillsRef.current.querySelectorAll('.skill-bar');
-      const skillItems = skillsRef.current.querySelectorAll('.skill-item');
-      
-      skillItems.forEach((item, index) => {
-        (item as HTMLElement).style.animationDelay = `${index * 100}ms`;
-      });
-      
-      skillBars.forEach((bar, index) => {
-        setTimeout(() => {
-          (bar as HTMLElement).style.width = `${skills[index]?.level}%`;
-        }, index * 150);
-      });
-    } else if (current === 0 && aboutRef.current) {
-      const aboutItems = aboutRef.current.querySelectorAll('.about-item');
-      aboutItems.forEach((item, index) => {
-        (item as HTMLElement).style.animationDelay = `${index * 100}ms`;
-      });
+    // Work experience with tech stack
+  const experience = [
+    {
+      position: 'Software Engineer',
+      company: 'Mint Solutions DMCC',
+      period: 'April 2025 - Present',
+      technologies: ['React', 'TypeScript', 'Java', 'Spring Boot', 'REST API', 'Postman'],
+      accomplishments: [
+        'Contributing to Foodwatch, a digital platform for food safety and nutrition for Dubai Municipality',
+        'Developing full-stack solutions for a trusted digital network connecting stakeholders, products, and processes',
+        'Building frontend interfaces and backend services for a platform that facilitates trust and reduces transaction costs'
+      ]
+    },
+    {
+      position: 'SAP ABAP Intern',
+      company: 'Hyundai Autoever',
+      period: 'February 2024 - August 2024',
+      technologies: ['SAP ABAP', 'SAP SD', 'SAP FI', 'ALV Grid'],
+      accomplishments: [
+        'Developed an editable ALV grid with split-screen layout for enhanced usability in SAP SD module',
+        'Built a solution to maintain dealer credit scores and records for efficient financial tracking in SAP FI',
+        'Implemented solutions across multiple SAP modules with focus on performance and user experience'
+      ]
     }
-  }, [current, skills]);
-
-  return (
-    <section className="py-20 relative z-10" id="about">
-      <style dangerouslySetInnerHTML={{ __html: animationStyles }} />
-      
+  ];  return (
+    <section 
+      ref={ref}
+      className={`py-20 relative z-10 ${className}`} 
+      id="about"
+    >
       <div className="container mx-auto px-4">
-        <h2 className="section-heading">About Me</h2>
+        <div className="flex flex-col items-center mb-12">
+          <h2 className="text-3xl font-bold mb-2 glitch-text" data-text="About Me">
+            <span className="text-primary">&lt;</span>
+            About Me
+            <span className="text-primary">/&gt;</span>
+          </h2>
+          <div className="w-20 h-1 bg-primary mb-6 tech-card"></div>
+          <p className="text-lg max-w-2xl text-center">
+            Software engineer with expertise in building scalable, performant web applications.
+            Passionate about clean code, seamless user experiences, and cutting-edge technologies.
+          </p>
+        </div>
         
-        <Carousel 
-          setApi={setApi}
-          className="w-full relative"
-          opts={{
-            align: "start",
-            loop: true,
-            containScroll: "trimSnaps",
-          }}
-        >
-          <CarouselContent className="h-auto">
-            {/* About Me Slide */}
-            <CarouselItem className="md:basis-full">
-              <div className="p-1">
-                <div ref={aboutRef} className="flex flex-col justify-between">
-                  <div className="text-lg space-y-4">
-                    <div className="flex items-start gap-3 about-item" style={{ animationDelay: '0ms' }}>
-                      <span className="text-xl flex-shrink-0 bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center text-primary">💻</span>
-                      <p><span className="font-medium">Code Magician:</span> Turning brainwaves into Java, React, and OracleDB magic tricks since... well, not that long ago.</p>
-                    </div>
-                    
-                    <div className="flex items-start gap-3 about-item" style={{ animationDelay: '100ms' }}>
-                      <span className="text-xl flex-shrink-0 bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center text-primary">🍔</span>
-                      <p><span className="font-medium">Foodwatcher Extraordinaire:</span> Currently serving up spicy code at Mint Solutions DMCC. No fries included.</p>
-                    </div>
-                    
-                    <div className="flex items-start gap-3 about-item" style={{ animationDelay: '200ms' }}>
-                      <span className="text-xl flex-shrink-0 bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center text-primary">🧙‍♂️</span>
-                      <p><span className="font-medium">SAP Sorcerer:</span> Graduated from the SAP ABAP wizardry school at Hyundai Autoever — survived, barely.</p>
-                    </div>
-                    
-                    <div className="flex items-start gap-3 about-item" style={{ animationDelay: '300ms' }}>
-                      <span className="text-xl flex-shrink-0 bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center text-primary">🚴‍♂️</span>
-                      <p><span className="font-medium">Pedal Pusher:</span> If coding was a sport, I'd be in the Tour de France. But it's not, so I just cycle... a lot.</p>
-                    </div>
-                    
-                    <div className="flex items-start gap-3 about-item" style={{ animationDelay: '400ms' }}>
-                      <span className="text-xl flex-shrink-0 bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center text-primary">⚽</span>
-                      <p><span className="font-medium">Footy Frenzy:</span> First-place finisher in the Anna University Football Match. My legs did the talking.</p>
-                    </div>
-                    
-                    <div className="flex items-start gap-3 about-item" style={{ animationDelay: '500ms' }}>
-                      <span className="text-xl flex-shrink-0 bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center text-primary">🎮</span>
-                      <p><span className="font-medium">Button Masher:</span> Crushed a FIFA tournament at IIM Indore. Yes, my thumbs are insured.</p>
-                    </div>
-                    
-                    <div className="flex items-start gap-3 about-item" style={{ animationDelay: '600ms' }}>
-                      <span className="text-xl flex-shrink-0 bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center text-primary">🏃</span>
-                      <p><span className="font-medium">Bug Buster:</span> Ran 50 km in a cyclothon and 24 km in the HCL Cyclothon. Also sprinting away from bugs daily.</p>
-                    </div>
-                  </div>
-                
-                  <DownloadButton 
-                    url="https://drive.google.com/drive/folders/1kLflMn9XL2MhNOm2znEMnFAYscPaaG2T"
-                    className="mt-6"
-                  />
-                </div>
-              </div>
-            </CarouselItem>
-            
-            {/* Technical Skills Slide */}
-            <CarouselItem className="md:basis-full">
-              <div className="p-1">
-                <div ref={skillsRef} className="space-y-6">
-                  <h3 className="text-xl font-semibold mb-4 flex items-center skill-item" style={{ animationDelay: '0ms' }}>
-                    <span className="text-xl mr-2 bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center text-primary">🚀</span>
-                    Technical Skills
-                  </h3>
-                  
-                  {skills.map((skill, index) => (
-                    <div key={skill.name} className="space-y-2 skill-item" style={{ animationDelay: `${index * 100}ms` }}>
-                      <div className="flex justify-between">
-                        <span className="font-medium">{skill.name}</span>
-                        <span className="text-muted-foreground">{skill.level}%</span>
-                      </div>
-                      <div className="w-full h-2 bg-secondary rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-primary rounded-full skill-bar transition-all duration-1000 ease-out"
-                          style={{ width: current === 1 ? `${skill.level}%` : '0%' }}
-                        ></div>
+        <Tabs defaultValue="education" className="w-full" 
+          onValueChange={(value) => setActiveTab(value)}>          <div className="flex justify-center mb-8">
+            <TabsList className="grid grid-cols-4 w-full max-w-xl tech-card">
+              <TabsTrigger value="education" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground tech-badge">
+                <span className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="tech-icon">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                  </svg>
+                  Education
+                </span>
+              </TabsTrigger>
+              <TabsTrigger value="skills" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground tech-badge">
+                <span className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="tech-icon">
+                    <path d="m18 16 4-4-4-4"></path>
+                    <path d="m6 8-4 4 4 4"></path>
+                    <path d="m14.5 4-5 16"></path>
+                  </svg>
+                  Skills
+                </span>
+              </TabsTrigger>
+              <TabsTrigger value="certifications" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground tech-badge">
+                <span className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="tech-icon">
+                    <path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"></path>
+                    <path d="M19 8a7 7 0 1 0-13.6 2.39"></path>
+                  </svg>
+                  Certificates
+                </span>
+              </TabsTrigger>
+              <TabsTrigger value="experience" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground tech-badge">
+                <span className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="tech-icon">
+                    <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                  Experience
+                </span>
+              </TabsTrigger>
+            </TabsList>
+          </div>
+            <TabsContent value="education" className="mt-6">
+            <div className="space-y-6">
+              {credentials.map((item, index) => (
+                <Card 
+                  key={index} 
+                  className="tech-card overflow-hidden border-primary/20 hover:border-primary/80 transition-all duration-300 hover:shadow-md"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex flex-col md:flex-row justify-between gap-4">
+                      <div className="w-full">
+                        <h3 className="text-xl font-semibold">
+                          <span className="glitch-text" data-text={item.title}>{item.title}</span>
+                        </h3>
+                        <p className="text-muted-foreground flex items-center gap-2">
+                          <span className="text-primary">[</span> 
+                          {item.institution} | {item.year}
+                          <span className="text-primary">]</span>
+                        </p>
+                        <ul className="list-none space-y-2 mt-3 text-sm md:text-base">
+                          {item.highlights.map((highlight, i) => (
+                            <li key={i} className="text-muted-foreground flex items-start gap-2 fade-in" style={{ animationDelay: `${(index * 0.1) + (i * 0.1)}s` }}>
+                              <span className="text-primary mt-1">{'>'}</span>
+                              {highlight}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </CarouselItem>
-          </CarouselContent>
-          
-          <div className="mt-4 flex justify-center gap-2">
-            <CarouselPrevious className="relative static left-0 translate-y-0 mx-2" />
-            <div className="flex gap-2">
-              {[0, 1].map((idx) => (
-                <button
-                  key={idx}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    current === idx ? "bg-primary scale-125" : "bg-secondary"
-                  }`}
-                  onClick={() => api?.scrollTo(idx)}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
+                  </CardContent>
+                </Card>
               ))}
             </div>
-            <CarouselNext className="relative static right-0 translate-y-0 mx-2" />
-          </div>
+          </TabsContent>            <TabsContent value="skills" className="mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {Object.entries(technicalSkills).map(([category, skills], catIndex) => (
+                <Card 
+                  key={category} 
+                  className="tech-card matrix-bg overflow-hidden border-primary/20 hover:border-primary/80 transition-colors duration-300 hover:shadow-xl"
+                  style={{ animationDelay: `${catIndex * 0.15}s` }}
+                >
+                  <div className="tech-card-header bg-primary/10 p-4 border-b border-primary/20">
+                    <h3 className="text-xl font-semibold capitalize counter-effect">
+                      <span className="text-primary opacity-70">{'<'}</span>
+                      {category === 'frontend' ? 'Frontend' : 
+                       category === 'backend' ? 'Backend' : 
+                       category === 'toolsDb' ? 'Tools & Database' :
+                       'AI & Tools'}
+                      <span className="text-primary opacity-70">{'/>'}</span>
+                    </h3>
+                  </div>
+                  <CardContent className="p-6">
+                    <div className="grid grid-cols-2 gap-3">
+                      {skills.map((skill, i) => (
+                        <Badge 
+                          key={skill.name} 
+                          variant="outline" 
+                          className="tech-badge py-2 text-sm flex items-center gap-2 justify-center bg-primary/5"
+                          style={{ animationDelay: `${(catIndex * 0.1) + (i * 0.05)}s` }}
+                        >
+                          <span className="tech-icon inline-block w-6 text-center">{skill.icon}</span>
+                          {skill.name}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>          <TabsContent value="experience" className="mt-6">
+            <div className="space-y-6">
+              {experience.map((job, index) => (
+                <Card 
+                  key={index} 
+                  className="tech-card overflow-hidden border-primary/20 hover:border-primary/80 transition-all duration-300 hover:shadow-xl"
+                  style={{ animationDelay: `${index * 0.15}s` }}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                      <div className="w-full">
+                        <h3 className="text-xl font-semibold terminal-effect">{job.position}</h3>
+                        <p className="text-muted-foreground flex items-center gap-2">
+                          <span className="text-primary opacity-70">$</span> 
+                          {job.company} | {job.period}
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2 my-3">
+                          {job.technologies.map((tech, i) => (
+                            <Badge 
+                              key={i} 
+                              variant="outline" 
+                              className="tech-badge bg-primary/10 hover:bg-primary/20"
+                              style={{ animationDelay: `${(index * 0.1) + (i * 0.05)}s` }}
+                            >
+                              {tech}
+                            </Badge>
+                          ))}
+                        </div>
+                        
+                        <ul className="list-none space-y-2 mt-3 text-sm md:text-base">
+                          {job.accomplishments.map((item, i) => (
+                            <li key={i} className="text-muted-foreground flex items-start gap-2 fade-in" style={{ animationDelay: `${(index * 0.1) + (i * 0.1)}s` }}>
+                              <span className="text-primary mt-1">$_</span>
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
           
-          {/* Swipe indicator */}
-          <div className="mt-4 text-center text-sm text-muted-foreground hidden md:block">
-            <span>Swipe or use arrows to navigate</span>
+          <TabsContent value="certifications" className="mt-6">
+            <div className="space-y-6">
+              {certifications.map((cert, index) => (
+                <Card 
+                  key={index} 
+                  className="tech-card overflow-hidden border-primary/20 hover:border-primary/80 transition-all duration-300 hover:shadow-xl"
+                  style={{ animationDelay: `${index * 0.15}s` }}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex flex-col md:flex-row items-start gap-4">
+                      <div className="flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-full bg-primary/10 text-3xl">
+                        {cert.logo}
+                      </div>
+                      <div className="w-full">
+                        <h3 className="text-xl font-semibold glitch-text" data-text={cert.title}>
+                          {cert.title}
+                        </h3>
+                        <p className="text-muted-foreground flex items-center gap-2">
+                          <span className="text-primary opacity-70">@</span> 
+                          {cert.issuer}
+                        </p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {cert.date}
+                        </p>
+                        {cert.credentialId && (
+                          <p className="text-sm mt-2 flex items-center gap-2">
+                            <span className="text-primary font-mono">ID:</span> 
+                            {cert.credentialId}
+                            {cert.credentialUrl && (
+                              <a 
+                                href={cert.credentialUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-primary underline hover:no-underline ml-2 tech-badge inline-flex px-2 py-1 text-xs"
+                              >
+                                View Credential
+                              </a>
+                            )}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>        </Tabs>
+        
+        <div className="flex justify-center mt-16">
+          <div className="download-resume-container">
+            <div className="download-resume-text">
+              <span className="text-primary font-mono text-sm opacity-70">&lt;resume&gt;</span>
+              <h3 className="text-xl font-bold mb-1">Get My Full Resume</h3>
+              <p className="text-sm text-muted-foreground mb-3">Complete details of my experience and qualifications</p>
+              <span className="text-primary font-mono text-sm opacity-70">&lt;/resume&gt;</span>
+            </div>
+            <DownloadButton 
+              url="/path-to-your-resume.pdf" 
+              text="Download CV" 
+              className="cyber-button"
+              magneticStrength={50}
+            />
           </div>
-          
-          {/* Mobile swipe indicator */}
-          <div className="mt-4 text-center text-sm text-muted-foreground md:hidden">
-            <span>Swipe left/right to see {current === 0 ? "Technical Skills" : "About Me"}</span>
-          </div>
-        </Carousel>
-      </div>
-    </section>
+        </div>
+      </div>    </section>
   );
-  
-  // Add useEffect to adjust height after render
-  useEffect(() => {
-    const adjustHeight = () => {
-      if (!aboutRef.current || !skillsRef.current) return;
-      
-      // Reset height first to get accurate measurements
-      skillsRef.current.style.minHeight = 'auto';
-      
-      // Get height of the about content
-      const aboutHeight = aboutRef.current.getBoundingClientRect().height;
-      
-      // Set skills height to match about content height
-      skillsRef.current.style.minHeight = `${aboutHeight}px`;
-    };
-    
-    // Run on mount and whenever current slide changes
-    adjustHeight();
-    window.addEventListener('resize', adjustHeight);
-    
-    return () => {
-      window.removeEventListener('resize', adjustHeight);
-    };
-  }, [current]);
-};
+});
 
 export default AboutSection;

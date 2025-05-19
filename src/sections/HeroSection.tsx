@@ -1,12 +1,16 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, forwardRef } from 'react';
 import MagneticElement from '../components/MagneticElement';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import '../components/HeroStyles.css';
 import '../components/TechProfileStyles.css';
 
-const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  className?: string;
+}
+
+const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ className = '' }, ref) => {
   const [typedText, setTypedText] = useState('');
   const [currentLine, setCurrentLine] = useState(0);
   const [currentChar, setCurrentChar] = useState(0);  const [isVisible, setIsVisible] = useState(false);
@@ -144,7 +148,11 @@ const HeroSection: React.FC = () => {
   }, []);
   
   return (
-    <section ref={containerRef} className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-black" id="home">
+    <section 
+      ref={ref} 
+      className={`min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-black ${className}`} 
+      id="home"
+    >
       {/* Background circuit pattern */}
       <div className="fixed inset-0 circuit-pattern opacity-20"></div>
       
@@ -324,7 +332,7 @@ const HeroSection: React.FC = () => {
       </svg>
       
       {/* Add CSS animation for orbit effect */}
-      <style jsx>{`
+      <style>{`
         @keyframes orbit {
           from { transform: rotate(0deg) translateX(80px) rotate(0deg); }
           to { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
@@ -336,8 +344,8 @@ const HeroSection: React.FC = () => {
           90% { opacity: var(--opacity); }
           100% { transform: translateY(-100vh); opacity: 0; }
         }
-      `}</style>
-    </section>
+      `}</style>    </section>
   );
-};
+});
+
 export default HeroSection;

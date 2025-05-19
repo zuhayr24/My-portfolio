@@ -1,0 +1,274 @@
+/* Tech-savvy animations for About section */
+:root {
+  --primary-rgb: 127, 86, 217; /* This should match your primary color in RGB format */
+}
+
+.tech-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tech-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  animation: scanline 3s linear infinite;
+  opacity: 0;
+}
+
+.tech-card:hover::before {
+  opacity: 1;
+}
+
+.tech-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.tech-card:hover::after {
+  opacity: 1;
+}
+
+.tech-card-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-card-header::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0%;
+  height: 1px;
+  background-color: var(--primary);
+  transition: width 0.5s ease;
+}
+
+.tech-card:hover .tech-card-header::before {
+  width: 100%;
+}
+
+.tech-badge {
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.tech-badge:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(var(--primary-rgb), 0.3);
+  background-color: rgba(var(--primary-rgb), 0.15) !important;
+}
+
+.tech-icon {
+  transition: transform 0.3s ease;
+}
+
+.tech-badge:hover .tech-icon {
+  transform: scale(1.2);
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.glitch-text::before {
+  color: #0ff;
+  z-index: -1;
+}
+
+.glitch-text::after {
+  color: #f0f;
+  z-index: -2;
+}
+
+.tech-card:hover .glitch-text::before {
+  animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  animation-delay: 0.1s;
+  opacity: 0.5;
+}
+
+.tech-card:hover .glitch-text::after {
+  animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+  animation-delay: 0.2s;
+  opacity: 0.5;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.terminal-effect {
+  overflow: hidden;
+  border-right: 2px solid var(--primary);
+  white-space: nowrap;
+  animation: typing 3.5s steps(30, end) infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Matrix-like background effect */
+.matrix-bg {
+  position: relative;
+}
+
+.matrix-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.1) 10%, transparent 10.5%);
+  background-size: 10px 10px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+.tech-card:hover .matrix-bg::before {
+  opacity: 0.5;
+}
+
+/* Digital counter effect */
+.counter-effect {
+  counter-reset: section;
+  position: relative;
+}
+
+.counter-effect::before {
+  counter-increment: section;
+  content: "0" counter(section);
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: var(--primary);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.tech-card:hover .counter-effect::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Download Resume Container */
+.download-resume-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: rgba(var(--primary-rgb), 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -15px rgba(var(--primary-rgb), 0.2);
+  max-width: 600px;
+}
+
+.download-resume-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 35%, rgba(var(--primary-rgb), 0.15) 0%, transparent 20%),
+    radial-gradient(circle at 75% 44%, rgba(var(--primary-rgb), 0.15) 0%, transparent 20%);
+  z-index: -1;
+}
+
+.download-resume-container::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(90deg, transparent, rgba(var(--primary-rgb), 0.1), transparent);
+  top: -100px;
+  left: -100px;
+  transform: rotate(45deg);
+  animation: lightMove 8s infinite linear;
+}
+
+@keyframes lightMove {
+  0% {
+    transform: rotate(45deg) translateX(-100%);
+  }
+  100% {
+    transform: rotate(45deg) translateX(1000%);
+  }
+}
+
+.download-resume-text {
+  flex: 1;
+}

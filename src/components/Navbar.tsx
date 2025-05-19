@@ -6,11 +6,11 @@ import { Button } from '@/components/ui/button';
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  const navLinks = [
+    const navLinks = [
     { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
-    { href: '#projects', label: 'Projects' }
+    { href: '#projects', label: 'Projects' },
+    { href: '#contact', label: 'Contact' }
   ];
   
   useEffect(() => {

@@ -1,0 +1,438 @@
+/* Tech-savvy Project Section animations */
+:root {
+  --primary-rgb: 127, 86, 217; /* Match your theme color */
+  --secondary-rgb: 30, 41, 59; /* For background and effects */
+  --accent-rgb: 0, 255, 255; /* Cyberpunk accent color */
+  --glow-color: rgba(var(--primary-rgb), 0.7);
+}
+
+/* Project Section Container */
+.projects-container {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.projects-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 35%, rgba(var(--primary-rgb), 0.15) 0%, transparent 20%),
+    radial-gradient(circle at 75% 44%, rgba(var(--primary-rgb), 0.15) 0%, transparent 20%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.projects-grid {
+  display: grid;
+  transition: all 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+/* Project Card Styling */
+.project-card {
+  position: relative;
+  background: rgba(var(--secondary-rgb), 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(var(--primary-rgb), 0.03),
+    transparent
+  );
+  z-index: -1;
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--primary-rgb), 0.1),
+    transparent
+  );
+  transition: all 0.7s ease;
+  z-index: -1;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 
+    0 20px 30px -15px rgba(var(--secondary-rgb), 0.3),
+    0 0 15px rgba(var(--primary-rgb), 0.3);
+  border-color: rgba(var(--primary-rgb), 0.5);
+}
+
+.project-card:hover::after {
+  left: 100%;
+}
+
+/* Image Container */
+.project-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  height: 220px;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.7s ease;
+  transform: scale(1.01);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.08);
+}
+
+.project-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(var(--secondary-rgb), 0.8) 100%
+  );
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-image-overlay {
+  opacity: 1;
+}
+
+/* Tech Badges */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  background: rgba(var(--primary-rgb), 0.1);
+  color: rgba(var(--primary-rgb), 1);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+}
+
+.project-card:hover .tech-badge {
+  background: rgba(var(--primary-rgb), 0.15);
+  transform: translateY(-2px);
+}
+
+/* Glitch Effect */
+.glitch-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.glitch-text {
+  position: relative;
+  display: inline-block;
+  animation: glitch-skew 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch-text::before {
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  text-shadow: 2px 0 rgba(var(--accent-rgb), 0.7);
+  left: 2px;
+}
+
+.glitch-text::after {
+  animation: glitch-anim2 2.5s infinite linear alternate-reverse;
+  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+  text-shadow: -2px 0 rgba(255, 0, 255, 0.7);
+  left: -2px;
+}
+
+@keyframes glitch-anim {
+  0% {
+    transform: translateX(0);
+  }
+  80% {
+    transform: translateX(0);
+  }
+  85% {
+    transform: translateX(5px);
+  }
+  90% {
+    transform: translateX(-5px);
+  }
+  95% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    transform: translateX(0);
+  }
+  80% {
+    transform: translateX(0);
+  }
+  85% {
+    transform: translateX(-5px);
+  }
+  90% {
+    transform: translateX(5px);
+  }
+  95% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes glitch-skew {
+  0% {
+    transform: skew(0deg);
+  }
+  88% {
+    transform: skew(0deg);
+  }
+  90% {
+    transform: skew(5deg);
+  }
+  94% {
+    transform: skew(-5deg);
+  }
+  98% {
+    transform: skew(3deg);
+  }
+  100% {
+    transform: skew(0deg);
+  }
+}
+
+/* Project Filter Styling */
+.filter-button {
+  position: relative;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(var(--primary-rgb), 0.3);
+  color: rgba(var(--secondary-rgb), 0.8);
+  border-radius: 4px;
+  font-weight: 500;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.filter-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(var(--primary-rgb), 0);
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.filter-button:hover::before,
+.filter-button-active::before {
+  background: rgba(var(--primary-rgb), 1);
+}
+
+.filter-button:hover,
+.filter-button-active {
+  color: white;
+  border-color: rgba(var(--primary-rgb), 1);
+  transform: translateY(-2px);
+}
+
+/* Coming soon card */
+.coming-soon-card {
+  position: relative;
+  border: 1px dashed rgba(var(--primary-rgb), 0.4);
+  background: rgba(var(--primary-rgb), 0.05);
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.coming-soon-card:hover {
+  border-color: rgba(var(--primary-rgb), 0.8);
+  box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.2);
+}
+
+.coming-soon-plus {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: rgba(var(--primary-rgb), 0.5);
+  transition: all 0.3s ease;
+}
+
+.coming-soon-card:hover .coming-soon-plus {
+  transform: rotate(45deg);
+  color: rgba(var(--primary-rgb), 0.8);
+}
+
+.coming-soon-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, rgba(var(--primary-rgb), 1), rgba(var(--accent-rgb), 1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.coming-soon-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(var(--primary-rgb), 0.7), transparent);
+  transition: all 0.5s ease;
+  animation: scan 3s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(300px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Project section heading */
+.project-heading {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.project-heading h2 {
+  display: inline-block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.project-heading h2::before {
+  content: '</>';
+  position: absolute;
+  left: -3rem;
+  top: 0.5rem;
+  font-size: 1.5rem;
+  opacity: 0.5;
+  color: rgba(var(--primary-rgb), 1);
+}
+
+.project-heading h2::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.5), rgba(var(--primary-rgb), 1), rgba(var(--primary-rgb), 0.5));
+}
+
+.project-subheading {
+  font-size: 1.1rem;
+  opacity: 0.7;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Terminal-style code animation */
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid rgba(var(--primary-rgb), 0.7);
+  width: 0;
+  animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: rgba(var(--primary-rgb), 0.7) }
+}
+
+/* Section fade-in animations */
+.animate-in {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

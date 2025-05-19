@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import MagneticElement from '../components/MagneticElement';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,7 +7,11 @@ import { toast } from 'sonner';
 import emailjs from '@emailjs/browser';
 import '../components/TechContactStyles.css';
 
-const ContactSection: React.FC = () => {
+interface ContactSectionProps {
+  className?: string;
+}
+
+const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ className = '' }, ref) => {
   const form = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -64,10 +68,13 @@ const ContactSection: React.FC = () => {
       toast.error("Failed to send message. Please try again later.");
     } finally {
       setIsSubmitting(false);
-    }
-  };
+    }  };
     return (
-    <section className="py-20 relative bg-black/90 overflow-hidden" id="contact">
+    <section 
+      ref={ref}
+      className={`py-20 relative bg-black/90 overflow-hidden ${className}`} 
+      id="contact"
+    >
       {/* Tech background elements */}
       <div className="absolute inset-0 circuit-pattern opacity-10"></div>
       
@@ -401,7 +408,7 @@ const ContactSection: React.FC = () => {
       <div className="data-node absolute bottom-10 right-1/4" style={{animationDelay: "0.7s"}}></div>
       
       {/* Float animation definition with improved styling */}
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0% { transform: translateY(0px); opacity: 0; }
           10% { opacity: var(--opacity); }
@@ -411,10 +418,9 @@ const ContactSection: React.FC = () => {
         
         .circuit-pattern {
           background-blend-mode: overlay;
-        }
-      `}</style>
+        }      `}</style>
     </section>
   );
-};
+});
 
 export default ContactSection;
