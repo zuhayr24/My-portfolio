@@ -151,12 +151,11 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ className
               <p className="pl-4 leading-relaxed">
                 Got a wild idea in AI, blockchain, or some tech I haven't googled yet? I'm all ears (and code). Whether it's building cool stuff, talking shop, or just sharing nerdy memes — let's collaborate and make some tech magic happen!
               </p>
-              
-              <p className="flex mt-4">
+                <p className="flex mt-4">
                 <span className="text-green-400 mr-2">$</span>
                 <span className="typing-effect" style={{animationDelay: "2s"}}>ls -la contact_methods/</span>
               </p>
-              <p className="pl-4 text-xs text-primary/70 mb-2">total 3 items, last updated: {new Date().toLocaleDateString()}</p>            </div>
+              <p className="pl-4 text-xs text-primary/70 mb-2">total 2 items, last updated: {new Date().toLocaleDateString()}</p></div>
             
             {/* Tech-styled social icons with enhanced hover effects */}
             <div className="space-y-3">
@@ -173,8 +172,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ className
                   </a>
                 </div>
               </div>
-              
-              <div className="group flex items-center gap-3 p-2 hover:bg-primary/10 rounded-md transition-all cursor-pointer relative overflow-hidden">
+                <div className="group flex items-center gap-3 p-2 hover:bg-primary/10 rounded-md transition-all cursor-pointer relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                 <div className="w-10 h-10 bg-primary/20 rounded-md flex items-center justify-center border border-primary/30 group-hover:border-primary/60 relative">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
@@ -183,20 +181,6 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ className
                 <div className="flex-1">
                   <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="font-mono text-sm text-primary hover:text-primary/80 transition-colors flex items-center">
                     <span className="mr-2 terminal-prompt">linkedin.com/in/zuhayr</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                  </a>
-                </div>
-              </div>
-              
-              <div className="group flex items-center gap-3 p-2 hover:bg-primary/10 rounded-md transition-all cursor-pointer relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                <div className="w-10 h-10 bg-primary/20 rounded-md flex items-center justify-center border border-primary/30 group-hover:border-primary/60 relative">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" /></svg>
-                  <div className="absolute inset-0 border border-primary/0 group-hover:border-primary/30 rounded-md animate-ping" style={{animationDuration: "1.5s"}}></div>
-                </div>
-                <div className="flex-1">
-                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="font-mono text-sm text-primary hover:text-primary/80 transition-colors flex items-center">
-                    <span className="mr-2 terminal-prompt">twitter.com/zuhayr</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
                   </a>
                 </div>
