@@ -346,11 +346,10 @@ const AboutSection = forwardRef<HTMLElement, AboutSectionProps>(({ className = '
                   </CardContent>
                 </Card>
               ))}
-            </div>
-          </TabsContent>        </Tabs>
+            </div>          </TabsContent>        </Tabs>
         
-        <div className="flex justify-center mt-16">
-          <div className="download-resume-container">
+        <div className="flex justify-center mt-8 mb-8">
+          <div className="download-resume-container mx-auto">
             <div className="download-resume-text">
               <span className="text-primary font-mono text-sm opacity-70">&lt;resume&gt;</span>
               <h3 className="text-xl font-bold mb-1">Get My Full Resume</h3>

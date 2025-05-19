@@ -23,7 +23,7 @@ const projectsData = [  {
     technologies: ['Java', 'Spring', 'MySQL', 'Tailwind', 'REST API'],
     imageUrl: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
     liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/example/project'
+    githubUrl: 'https://github.com/zuhayr24/Hostel-outpass-system'
   }, 
   {
     id: 3,
@@ -31,7 +31,7 @@ const projectsData = [  {
     description: 'An IoT-based automatic pet feeding system that allows scheduling, portion control, and remote monitoring for pet owners.',
     technologies: ['C++', 'Arduino'],
     imageUrl: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-    githubUrl: 'https://github.com/example/project'
+    githubUrl: 'https://github.com/zuhayr24/pet-feeder'
   }, 
   {
     id: 4,
@@ -40,7 +40,7 @@ const projectsData = [  {
     technologies: ['Python', 'Google Colab', 'Kaggle'],
     imageUrl: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
     liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/example/project'
+    githubUrl: 'https://github.com/zuhayr24/Spam-mail-Detection'
   }
 ];
 
@@ -67,7 +67,7 @@ const ProjectsSection = forwardRef<HTMLElement, ProjectsSectionProps>(({ classNa
   }, []);  return (
     <section 
       ref={ref}
-      className={`py-20 bg-secondary/5 projects-container ${className}`} 
+      className={`pt-8 pb-20 bg-secondary/5 projects-container ${className}`} 
       id="projects"
     >
       <div className="container mx-auto px-4">
