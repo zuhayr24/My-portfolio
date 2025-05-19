@@ -224,7 +224,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ className = '' 
                 <div 
                   className="absolute inset-0"
                   style={{
-                    backgroundImage: 'url(https://videos.openai.com/vg-assets/assets%2Ftask_01jvmeatfwep2thxet0j2ek61t%2F1747664134_img_0.webp?st=2025-05-19T12%3A43%3A26Z&se=2025-05-25T13%3A43%3A26Z&sks=b&skt=2025-05-19T12%3A43%3A26Z&ske=2025-05-25T13%3A43%3A26Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=gl2AuU%2Bh82zEVHX%2FF%2B8VuT2PJrYUGZM6B1agWr70Q8U%3D&az=oaivgprodscus)',
+                    backgroundImage: 'url(https://videos.openai.com/vg-assets/assets%2Ftask_01jvmeatfwep2thxet0j2ek61t%2F1747664134_img_0.webp?st=2025-05-19T12%3A45%3A30Z&se=2025-05-25T13%3A45%3A30Z&sks=b&skt=2025-05-19T12%3A45%3A30Z&ske=2025-05-25T13%3A45%3A30Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=qeVnD%2BLXBxcKC%2Fftn2Cez4QY%2FBvve8%2FwT6gRZBzsGgk%3D&az=oaivgprodscus)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
