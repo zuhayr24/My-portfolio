@@ -13,18 +13,15 @@ const projectsData = [  {
     title: 'Foodwatch',
     description: 'A digital platform for food safety and nutrition for Dubai Municipality. A comprehensive solution connecting stakeholders and facilitating food safety compliance.',
     technologies: ['React', 'Java', 'Spring', 'Tailwind', 'Vite', 'REST API', 'Oracle DB', 'Postman'],
-    imageUrl: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-    liveUrl: 'https://example.com'
-  },
-  {
+    imageUrl: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+  },  {
     id: 2,
     title: 'Hostel Outpass & Grievance System',
     description: 'A comprehensive system for managing hostel outpass requests and student grievances, streamlining administrative processes and improving communication.',
     technologies: ['Java', 'Spring', 'MySQL', 'Tailwind', 'REST API'],
     imageUrl: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-    liveUrl: 'https://example.com',
     githubUrl: 'https://github.com/zuhayr24/Hostel-outpass-system'
-  }, 
+  },
   {
     id: 3,
     title: 'Smart Pet Feeder',
@@ -32,14 +29,12 @@ const projectsData = [  {
     technologies: ['C++', 'Arduino'],
     imageUrl: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
     githubUrl: 'https://github.com/zuhayr24/pet-feeder'
-  }, 
-  {
+  },   {
     id: 4,
     title: 'Spam Mail Detection',
-    description: 'Machine learning-based email classification system that identifies and filters spam emails with high accuracy using NLP techniques.',
-    technologies: ['Python', 'Google Colab', 'Kaggle'],
+    description: 'A machine learning model using Logistic Regression and TF-IDF Vectorization to classify emails as spam or legitimate. Features preprocessing of text data, high accuracy metrics, and a predictive system for custom email inputs.',
+    technologies: ['Python', 'Scikit-learn', 'NLP', 'TF-IDF'],
     imageUrl: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-    liveUrl: 'https://example.com',
     githubUrl: 'https://github.com/zuhayr24/Spam-mail-Detection'
   }
 ];
