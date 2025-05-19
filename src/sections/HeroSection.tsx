@@ -1,5 +1,4 @@
-
-import React, { useEffect, useRef, useState, forwardRef } from 'react';
+import React, { useEffect, useRef, useState, forwardRef, useMemo } from 'react';
 import MagneticElement from '../components/MagneticElement';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -13,9 +12,22 @@ interface HeroSectionProps {
 const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ className = '' }, ref) => {
   const [typedText, setTypedText] = useState('');
   const [currentLine, setCurrentLine] = useState(0);
-  const [currentChar, setCurrentChar] = useState(0);  const [isVisible, setIsVisible] = useState(false);
+  const [currentChar, setCurrentChar] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const circuitRef = useRef<SVGSVGElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null); // Use on <section>
+  const particlesRef = useRef<NodeListOf<Element> | null>(null);
+  const mouseMoveTimeout = useRef<number | null>(null);
+
+  // Memoize binary elements so they're not recreated on every render
+  const binaryElements = useMemo(() => Array.from({ length: 50 }, () => ({
+    value: Math.random().toString(2).substring(2, 10),
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    opacity: Math.random() * 0.5 + 0.1,
+    size: Math.random() * 0.8 + 0.6,
+    speed: Math.random() * 40 + 20
+  })), []);
   
   // Function to scroll to a section
   const scrollToSection = (sectionId: string) => {
@@ -25,16 +37,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ className = '' 
     }
   };
   
-  // Binary numbers for tech effect
-  const binaryElements = Array.from({ length: 50 }, () => ({
-    value: Math.random().toString(2).substring(2, 10),
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    opacity: Math.random() * 0.5 + 0.1,
-    size: Math.random() * 0.8 + 0.6,
-    speed: Math.random() * 40 + 20
-  }));
-    // Terminal typing effect text
+  // Terminal typing effect text
   const terminalLines = [
     "Initializing system...",
     "Loading profile: Mohammed Zuhayr Hussain",
@@ -57,27 +60,24 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ className = '' 
   // Typing effect
   useEffect(() => {
     setIsVisible(true);
-    
+    if (currentLine >= terminalLines.length) return;
+    let typingTimeout: NodeJS.Timeout;
     const typeText = () => {
-      if (currentLine < terminalLines.length) {
-        const line = terminalLines[currentLine];
-        
-        if (currentChar < line.length) {
-          setTypedText(prev => prev + line[currentChar]);
-          setCurrentChar(currentChar + 1);
-        } else {
-          setTypedText(prev => prev + '\n');
-          setCurrentLine(currentLine + 1);
-          setCurrentChar(0);
-        }
+      const line = terminalLines[currentLine];
+      if (currentChar < line.length) {
+        setTypedText(prev => prev + line[currentChar]);
+        setCurrentChar(c => c + 1);
+      } else {
+        setTypedText(prev => prev + '\n');
+        setCurrentLine(l => l + 1);
+        setCurrentChar(0);
       }
     };
-    
-    const typingInterval = setInterval(typeText, 50);
-    
-    return () => clearInterval(typingInterval);
+    typingTimeout = setTimeout(typeText, 50);
+    return () => clearTimeout(typingTimeout);
   }, [currentLine, currentChar]);
-    // Interactive SVG circuit paths
+  
+  // Interactive SVG circuit paths
   useEffect(() => {
     if (circuitRef.current) {
       const circuit = circuitRef.current;
@@ -92,7 +92,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ className = '' 
         
         // Define the animation
         setTimeout(() => {
-          path.style.transition = 'stroke-dashoffset 2s ease-in-out';
+          path.style.transition = 'stroke-dashoffset 2s cubic-bezier(0.4,0,0.2,1)';
           path.style.strokeDashoffset = '0';
         }, index * 200);
       });
@@ -110,46 +110,50 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ className = '' 
         
         // Define the animation
         setTimeout(() => {
-          path.style.transition = 'stroke-dashoffset 2s ease-in-out';
+          path.style.transition = 'stroke-dashoffset 2s cubic-bezier(0.4,0,0.2,1)';
           path.style.strokeDashoffset = '0';
         }, index * 150);
       }
     });
   }, []);
   
-  // Mouse move effect for particles
+  // Mouse move effect for particles (throttled)
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
-      
+      if (!particlesRef.current) {
+        particlesRef.current = containerRef.current.querySelectorAll('.tech-particle');
+      }
       const { clientX, clientY } = e;
       const { left, top, width, height } = containerRef.current.getBoundingClientRect();
-      
-      // Calculate relative position in the container
       const x = (clientX - left) / width;
       const y = (clientY - top) / height;
-      
-      // Move particles slightly in mouse direction
-      const particles = containerRef.current.querySelectorAll('.tech-particle');
-      particles.forEach((particle) => {
-        const speed = parseFloat((particle as HTMLElement).dataset.speed || '1');
-        const offsetX = (x - 0.5) * 40 * speed;
-        const offsetY = (y - 0.5) * 40 * speed;
-        
-        (particle as HTMLElement).style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      if (mouseMoveTimeout.current) {
+        window.cancelAnimationFrame(mouseMoveTimeout.current);
+      }
+      mouseMoveTimeout.current = window.requestAnimationFrame(() => {
+        particlesRef.current?.forEach((particle) => {
+          const speed = parseFloat((particle as HTMLElement).dataset.speed || '1');
+          const offsetX = (x - 0.5) * 40 * speed;
+          const offsetY = (y - 0.5) * 40 * speed;
+          (particle as HTMLElement).style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        });
       });
     };
-    
     window.addEventListener('mousemove', handleMouseMove);
-    
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      if (mouseMoveTimeout.current) window.cancelAnimationFrame(mouseMoveTimeout.current);
     };
   }, []);
   
   return (
     <section 
-      ref={ref} 
+      ref={node => {
+        if (typeof ref === 'function') ref(node);
+        // @ts-ignore
+        containerRef.current = node;
+      }}
       className={`min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-black ${className}`} 
       id="home"
     >
@@ -220,7 +224,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ className = '' 
                 <div 
                   className="absolute inset-0"
                   style={{
-                    backgroundImage: 'url(https://images.unsplash.com/photo-1581092795360-fd1ca04f0952)',
+                    backgroundImage: 'url(https://videos.openai.com/vg-assets/assets%2Ftask_01jvmeatfwep2thxet0j2ek61t%2F1747664134_img_0.webp?st=2025-05-19T12%3A43%3A26Z&se=2025-05-25T13%3A43%3A26Z&sks=b&skt=2025-05-19T12%3A43%3A26Z&ske=2025-05-25T13%3A43%3A26Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=gl2AuU%2Bh82zEVHX%2FF%2B8VuT2PJrYUGZM6B1agWr70Q8U%3D&az=oaivgprodscus)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
