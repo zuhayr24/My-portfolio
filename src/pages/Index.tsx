@@ -34,8 +34,7 @@ const Index = () => {
       }
     });
   }, []);
-
-  // Smooth scroll function for navigation links
+  // Smooth scroll function for navigation links  
   useEffect(() => {
     const handleHashLinkClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -54,7 +53,9 @@ const Index = () => {
           behavior: 'smooth'
         });
       }
-    };    document.addEventListener('click', handleHashLinkClick);
+    };
+    
+    document.addEventListener('click', handleHashLinkClick);
     window.addEventListener('scroll', handleScroll);
       // Hide welcome overlay after 8 seconds (increased to allow displacement text to fully show)
     const timer = setTimeout(() => {
