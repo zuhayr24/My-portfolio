@@ -60,3 +60,11 @@ a:hover,
 *[draggable="true"]:active {
   cursor: none !important;
 }
+
+/* Hide custom cursor on mobile devices */
+@media (max-width: 640px) {
+  .custom-cursor,
+  .cursor-dot {
+    display: none !important;
+  }
+}
