@@ -1,0 +1,242 @@
+/* Tech Contact Section Styles */
+
+/* Circuit pattern background */
+.circuit-pattern {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(30, 174, 219, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(30, 174, 219, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(30, 174, 219, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 174, 219, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+}
+
+/* Data flow animation */
+.data-flow {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(30, 174, 219, 0.5) 50%, 
+    transparent 100%);
+  animation: data-pulse 3s infinite linear;
+  opacity: 0.7;
+}
+
+@keyframes data-pulse {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+/* Matrix-like binary rain effect */
+.binary-rain {
+  position: absolute;
+  color: rgba(30, 174, 219, 0.3);
+  font-family: monospace;
+  font-size: 12px;
+  white-space: nowrap;
+  top: 0;
+  animation: binary-fall linear infinite;
+}
+
+@keyframes binary-fall {
+  from {
+    transform: translateY(-100px);
+  }
+  to {
+    transform: translateY(calc(100vh + 100px));
+  }
+}
+
+/* Glowing effect for form elements on focus */
+.tech-input-glow:focus {
+  box-shadow: 0 0 10px rgba(30, 174, 219, 0.7);
+  border-color: rgba(30, 174, 219, 0.7) !important;
+  outline: none;
+}
+
+/* Terminal prompt blinking cursor */
+.terminal-prompt::after {
+  content: '▋';
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+  color: #1EAEDB;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Terminal command typing effect */
+.typing-effect {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end);
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* Tech corner accent for panels */
+.tech-corner {
+  position: relative;
+}
+
+.tech-corner::before, 
+.tech-corner::after,
+.tech-corner > span::before,
+.tech-corner > span::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: rgba(30, 174, 219, 0.6);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0.8;
+}
+
+.tech-corner::before {
+  top: 0;
+  left: 0;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.tech-corner::after {
+  top: 0;
+  right: 0;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+
+.tech-corner > span::before {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+.tech-corner > span::after {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+/* Scanning effect for active elements */
+.scan-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, 
+    transparent, 
+    rgba(30, 174, 219, 0.8), 
+    transparent
+  );
+  animation: scan 2s ease-in-out infinite;
+  opacity: 0;
+  z-index: 1;
+}
+
+@keyframes scan {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.8;
+  }
+  95% {
+    opacity: 0.8;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Tech data nodes for connection points */
+.data-node {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(30, 174, 219, 0.7);
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 8px rgba(30, 174, 219, 0.8);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Enhanced terminal-like style for text */
+.terminal-text {
+  font-family: monospace;
+  color: rgba(30, 174, 219, 0.9);
+  text-shadow: 0 0 5px rgba(30, 174, 219, 0.5);
+}
+
+/* Tech-styled scrollbar */
+.tech-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.tech-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.tech-scroll::-webkit-scrollbar-thumb {
+  background: rgba(30, 174, 219, 0.5);
+  border-radius: 3px;
+}
+
+.tech-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(30, 174, 219, 0.8);
+}
+
+/* Spinning animation for cybersecurity verification */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Data verification grid (like in sci-fi movies) */
+.data-verification-grid {
+  background-image: 
+    linear-gradient(rgba(30, 174, 219, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 174, 219, 0.07) 1px, transparent 1px);
+  background-size: 10px 10px;
+  animation: grid-scan 2s linear infinite;
+}
+
+@keyframes grid-scan {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 10px 10px;
+  }
+}

@@ -1,0 +1,257 @@
+/* Advanced Tech Profile Styles */
+
+/* Hexagonal profile frame with high-tech effects */
+.tech-profile-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  margin: 0 auto;
+}
+
+/* Main hexagon clip path */
+.tech-profile-hex {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: linear-gradient(135deg, 
+    rgba(30, 174, 219, 0.05),
+    rgba(30, 174, 219, 0.2),
+    rgba(51, 195, 240, 0.05)
+  );
+  border: 2px solid rgba(30, 174, 219, 0.3);
+  box-shadow: 
+    0 0 15px rgba(30, 174, 219, 0.3),
+    inset 0 0 20px rgba(30, 174, 219, 0.1);
+  transition: all 0.5s ease-in-out;
+}
+
+.tech-profile-hex:hover {
+  border-color: rgba(30, 174, 219, 0.6);
+  box-shadow: 
+    0 0 25px rgba(30, 174, 219, 0.5),
+    inset 0 0 30px rgba(30, 174, 219, 0.2);
+}
+
+/* Inner hexagon with borders */
+.tech-profile-inner {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+/* Double hexagon effect */
+.tech-profile-border {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: linear-gradient(45deg, 
+    transparent, 
+    rgba(30, 174, 219, 0.3), 
+    transparent
+  );
+  animation: rotate-border 20s linear infinite;
+}
+
+@keyframes rotate-border {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 200%; }
+}
+
+/* Scanning effect */
+.tech-profile-scan {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(30, 174, 219, 0.2),
+    rgba(30, 174, 219, 0.4),
+    rgba(30, 174, 219, 0.2),
+    transparent
+  );
+  animation: vertical-scan 4s ease-in-out infinite;
+}
+
+@keyframes vertical-scan {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* Horizontal scanning line */
+.tech-profile-scan-horizontal {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(30, 174, 219, 0.2),
+    rgba(30, 174, 219, 0.5),
+    rgba(30, 174, 219, 0.2),
+    transparent
+  );
+  animation: horizontal-scan 3s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(30, 174, 219, 0.5);
+}
+
+@keyframes horizontal-scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Corner nodes */
+.tech-profile-node {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(30, 174, 219, 0.2);
+  box-shadow: 0 0 10px rgba(30, 174, 219, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.tech-profile-node::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1EAEDB;
+  animation: node-pulse 2s ease-in-out infinite;
+}
+
+@keyframes node-pulse {
+  0%, 100% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* Data particles that orbit */
+.tech-profile-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(30, 174, 219, 0.8);
+  box-shadow: 0 0 8px rgba(30, 174, 219, 0.8);
+  transform-origin: center center;
+}
+
+/* Circuit paths */
+.tech-profile-circuit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.tech-profile-circuit path {
+  stroke: #1EAEDB;
+  stroke-width: 1;
+  fill: none;
+  stroke-dasharray: 10;
+  stroke-dashoffset: 1000;
+  animation: circuit-dash 4s linear forwards;
+}
+
+@keyframes circuit-dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Data points animation */
+.tech-profile-data {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #1EAEDB;
+  opacity: 0;
+  animation: data-flow 3s linear infinite;
+}
+
+@keyframes data-flow {
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0; transform: scale(0.5); }
+}
+
+/* Tech info panel */
+.tech-profile-info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(30, 174, 219, 0.3);
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 10;
+}
+
+.tech-profile-container:hover .tech-profile-info {
+  transform: translateY(0);
+}
+
+.tech-profile-info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: rgba(30, 174, 219, 0.9);
+}
+
+.tech-profile-info-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1EAEDB;
+  animation: info-pulse 2s ease-in-out infinite;
+}
+
+@keyframes info-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* 3D transform effect on hover */
+.tech-profile-container:hover .tech-profile-hex {
+  transform: perspective(1000px) rotateY(5deg) rotateX(5deg);
+}
+
+/* Holographic overlay effect */
+.tech-profile-holographic {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    transparent, 
+    rgba(30, 174, 219, 0.1), 
+    transparent
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Glow animation */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(30, 174, 219, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(30, 174, 219, 0.6); }
+}
+
+.glow-animation {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
