@@ -156,7 +156,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ className
                     <h4 className="text-gray-300 font-medium">LinkedIn</h4>
                     <SimpleWrapper>
                       <a 
-                        href="https://www.linkedin.com/in/zuhayr" 
+                        href=" https://www.linkedin.com/me?trk=p_mwlite_profile_self-secondary_nav" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="text-gray-400 hover:text-[#1EAEDB] transition-colors"
