@@ -1,0 +1,163 @@
+/* Sleek Dark Contact Styles */
+
+/* Dark background with subtle pattern */
+.dark-contact-bg {
+  background-color: #0a0a0a;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(30, 30, 30, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(30, 30, 30, 0.2) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+  border-radius: 8px;
+  background: linear-gradient(#0a0a0a, #0a0a0a) padding-box,
+              linear-gradient(90deg, rgba(50, 50, 50, 0.5), rgba(30, 174, 219, 0.8), rgba(50, 50, 50, 0.5)) border-box;
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(30, 174, 219, 0.1) 50%, 
+    transparent 100%);
+  animation: gradient-shine 3s linear infinite;
+}
+
+@keyframes gradient-shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Neon glow text */
+.neon-text {
+  color: #fff;
+  text-shadow: 0 0 5px rgba(30, 174, 219, 0.5), 0 0 10px rgba(30, 174, 219, 0.3);
+  letter-spacing: 1px;
+}
+
+.neon-text-intense {
+  color: #1EAEDB;
+  text-shadow: 0 0 5px rgba(30, 174, 219, 0.7), 0 0 10px rgba(30, 174, 219, 0.5), 0 0 15px rgba(30, 174, 219, 0.3);
+}
+
+/* Custom form styles */
+.dark-input {
+  background-color: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(50, 50, 50, 0.8);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.dark-input:focus {
+  background-color: rgba(15, 15, 15, 0.9);
+  border-color: rgba(30, 174, 219, 0.5);
+  box-shadow: 0 0 0 2px rgba(30, 174, 219, 0.2);
+}
+
+.dark-input::placeholder {
+  color: rgba(150, 150, 150, 0.7);
+}
+
+/* Section divider */
+.sleek-divider {
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(30, 174, 219, 0.7), 
+    transparent);
+  width: 100%;
+}
+
+/* Pulsing social icons */
+.social-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-icon-container:hover {
+  transform: translateY(-3px);
+}
+
+.social-pulse {
+  position: absolute;
+  border-radius: 50%;
+  animation: social-ripple 2s ease-out infinite;
+  border: 1px solid rgba(30, 174, 219, 0.5);
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+@keyframes social-ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Ambient Background Animation */
+.ambient-dots {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: rgba(30, 174, 219, 0.3);
+  border-radius: 50%;
+}
+
+/* Custom submit button */
+.submit-btn {
+  position: relative;
+  background: linear-gradient(90deg, #0a0a0a, #121212);
+  border: 1px solid rgba(30, 174, 219, 0.5);
+  color: #fff;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(30, 174, 219, 0.2), 
+    transparent);
+  transition: all 0.5s ease;
+}
+
+.submit-btn:hover::before {
+  left: 100%;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(90deg, #111111, #181818);
+  border-color: rgba(30, 174, 219, 0.8);
+}
+
+/* Shadow card effect */
+.shadow-card {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}

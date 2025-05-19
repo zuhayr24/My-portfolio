@@ -18,10 +18,11 @@ const SimpleWrapper: React.FC<SimpleWrapperProps> = ({ children, className = '' 
       style={{
         transform: isHovered ? 'scale(1.05)' : 'scale(1)',
         boxShadow: isHovered ? '0 0 10px rgba(30, 174, 219, 0.3)' : 'none',
-        transition: 'all 0.3s ease'
+        transition: 'all 0.3s ease',
+        pointerEvents: 'none' // This ensures the wrapper doesn't block clicks
       }}
     >
-      <div className="relative z-10">
+      <div className="relative z-10" style={{ pointerEvents: 'auto' }}>
         {children}
       </div>
     </div>
